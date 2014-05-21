@@ -18,17 +18,20 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+
+        // Try to login
         new ComService(
-				"/", 
-				MainActivity.this, 
-				"loginDone", 
-				false); // Hide progress bar cuz we will set it manually
+			"/", 
+			MainActivity.this, 
+			"loginDone",
+			false
+        ); // Hide progress bar cuz we will set it manually
 	
         
     }
     
     public void loginDone(String result) {
-		Log.d("mylog", result);
+		Log.d("loginDone()", "I've logged in");
 	}
 
 

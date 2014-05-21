@@ -3,6 +3,7 @@ package org.up.fe.tdin.tdintroubletickets.helper;
 
 import java.lang.reflect.Method;
 
+import org.apache.http.HttpResponse;
 import org.up.fe.tdin.tdintroubletickets.R;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +25,14 @@ public class ComService extends AsyncTask<String, String, String> {
 		this(url, object, methodName, showProgress, ((Context) object).getString(R.string.fetching_data));
 	}
 	
+	/**
+	 * Constructor with dialog message.
+	 * @param url The url to access
+	 * @param object The activity to callback
+	 * @param methodName The callback method
+	 * @param showProgress The boolean to indicate if a progress message should be displayed
+	 * @param dialogMessage The dialog message string
+	 */
 	public ComService(String url, Object object, String methodName, boolean showProgress, String dialogMessage) {
 		Log.e("mylog", url );
 		String full_url = serverURL + url;
@@ -31,6 +40,7 @@ public class ComService extends AsyncTask<String, String, String> {
 		this.object = object;
 		this.execute(full_url);
 		this.showProgress = showProgress;
+
 		//set message of the dialog
 		if (showProgress) {
 			dialog = new ProgressDialog((Context) object);
@@ -48,12 +58,14 @@ public class ComService extends AsyncTask<String, String, String> {
 	}
 	
 	@Override
-	protected void onPostExecute (String result){
+	protected void onPostExecute (String response){
 //		System.out.println(result);
 //		Log.e("mylog", "result " + result);
 //		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
-		Log.v("tdin", result);
+
+		String result = "----";
+		Log.v("onPostExecute()", result);
 		if (showProgress) {
 			dialog.dismiss();
 		}

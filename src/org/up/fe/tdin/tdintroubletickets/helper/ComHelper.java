@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.util.EntityUtils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -84,55 +85,30 @@ public class ComHelper{
 	}
 
 	/**
-	 * Makes a GET call to the server.
-	 * @param params 0-> Call Method = GET; 1-> URL
-	 * @return
-	 */
-	public static String httpGet(String... params) {
-//		getApplicationContext()
-		Log.v("mylog", "doing get");
-		try {
-			URL url = new URL(params[0]);
-			Log.v("mylog", params[0]);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-			String r = readStream(in);
-			urlConnection.disconnect();
-			return r;
-		} catch (MalformedURLException e){
-			e.printStackTrace();
-			return "GET: Bad URL";
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "GET: Bad Con";
-		}
-	}
-	
-	/**
 	 * Performs an HTTP GET Request.
 	 * @param params 0-> URL
 	 */
 	public static String getHTTP(String... params) {
-		Log.v("tdin", "Getting URL");
+		HttpClient httpclient = new DefaultHttpClient();  
 		HttpUriRequest request = new HttpGet(params[0]); // Or HttpPost(), depends on your needs  
+
+		// The authorization part
 		String credentials = "jsvgoncalves@gmail.com" + ":" + "123456";  
 		String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);  
 		request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
-
-		HttpClient httpclient = new DefaultHttpClient();  
+		
 		try {
 			HttpResponse response = httpclient.execute(request);
-			Log.v("http", response.getStatusLine().toString());
-			return response.toString();
+			// The status of the response (eg. 200, 404)
+			//Log.v("http", response.getStatusLine().toString());
+			// The content of the response
+			//Log.v("http-content",  EntityUtils.toString(response.getEntity()));
+			return EntityUtils.toString(response.getEntity());
 		} catch(Exception e) {
 
 		}
-		return "Oops";
+		return null;
 	}
-	
-	protected void onPostExecute(String result) {
-        System.err.println(result);
-    }
 	
 	public static boolean isOnline(Context context) {
 		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
