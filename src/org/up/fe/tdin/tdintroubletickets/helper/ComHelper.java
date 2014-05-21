@@ -19,6 +19,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.auth.AuthScope;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.HttpStatus;
 import android.content.Context;
@@ -33,21 +36,6 @@ import android.util.Log;
  *
  */
 public class ComHelper{
-
-	private static String readStream(InputStream is) {
-		try {
-			ByteArrayOutputStream bo = new ByteArrayOutputStream();
-			int i = is.read();
-			while(i != -1) {
-				bo.write(i);
-				i = is.read();
-			}
-			return bo.toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "";
-		}
-	}
 	
 	/**
 	 * Makes a POST call to the server.
@@ -56,33 +44,33 @@ public class ComHelper{
 	 */
 	public static String httpPost(String... params) {
 		HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost request = new HttpPost(params[1]);
+		HttpPost request = new HttpPost(params[1]);
 
-	    try {
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	        for (int i = 1; i+1 < params.length; i+=2) {
-	        	nameValuePairs.add(new BasicNameValuePair(params[i], params[i+1]));
+		try {
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			for (int i = 1; i+1 < params.length; i+=2) {
+				nameValuePairs.add(new BasicNameValuePair(params[i], params[i+1]));
 			}
-	        if (!nameValuePairs.isEmpty()) {
-	        	request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			if (!nameValuePairs.isEmpty()) {
+				request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			}
 
-	        // Add the login header each time.
-	        String credentials = "jsvgoncalves@gmail.com" + ":" + "123456";  
-	        String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);  
-	        request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
-	        
-	        // Execute HTTP Post Request
-	        HttpResponse response = httpclient.execute(request);
-	        System.out.println(response.toString());
-	        return response.toString();
-	    } catch (ClientProtocolException e) {
-	    	e.printStackTrace();
+			// Add the login header each time.
+			String credentials = "jsvgoncalves@gmail.com" + ":" + "123456";  
+			String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);  
+			request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
+			
+			// Execute HTTP Post Request
+			HttpResponse response = httpclient.execute(request);
+			System.out.println(response.toString());
+			return response.toString();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
 			return "Client Protocol Exception";
-	    } catch (IOException e) {
-	    	e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 			return "POST: Bad Con";
-	    }
+		}
 	}
 
 	/**
@@ -128,8 +116,8 @@ public class ComHelper{
 	
 	public static boolean isOnline(Context context) {
 		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-	    return (networkInfo != null && networkInfo.isConnected());
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		return (networkInfo != null && networkInfo.isConnected());
 	}
 	
 }
