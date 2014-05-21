@@ -13,6 +13,7 @@ import android.util.Log;
 public class ComService extends AsyncTask<String, String, String> {
 	
 	public static String serverURL = "http://192.168.102.240/tdin-webservice";
+	public static String extensionURL = ".json";
 	ProgressDialog dialog;
 	String methodName;
 	Object object;
@@ -34,7 +35,7 @@ public class ComService extends AsyncTask<String, String, String> {
 	 * @param dialogMessage The dialog message string
 	 */
 	public ComService(String url, Object object, String methodName, boolean showProgress, String dialogMessage) {
-		String full_url = serverURL + url;
+		String full_url = serverURL + url + extensionURL;
 		this.methodName = methodName;
 		this.object = object;
 		this.execute(full_url);
