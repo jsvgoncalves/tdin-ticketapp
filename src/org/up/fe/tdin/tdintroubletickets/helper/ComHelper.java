@@ -15,12 +15,15 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.client.methods.HttpUriRequest;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import android.util.Base64;
 import android.util.Log;
 /**
  * Contains facilities to connect to the REST server
@@ -28,11 +31,6 @@ import android.util.Log;
  *
  */
 public class ComHelper{
-	
-//	public static final String JSON_EXTENSION = ".json";
-	//public static String serverURL = "http://busphone-service.herokuapp.com/";
-	
-
 
 	private static String readStream(InputStream is) {
 		try {
@@ -67,6 +65,11 @@ public class ComHelper{
 	        	request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			}
 
+	        // Add the login header each time.
+	        String credentials = "jsvgoncalves@gmail.com" + ":" + "123456";  
+	        String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);  
+	        request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
+	        
 	        // Execute HTTP Post Request
 	        HttpResponse response = httpclient.execute(request);
 	        System.out.println(response.toString());
@@ -103,6 +106,28 @@ public class ComHelper{
 			e.printStackTrace();
 			return "GET: Bad Con";
 		}
+	}
+	
+	/**
+	 * Performs an HTTP GET Request.
+	 * @param params 0-> URL
+	 */
+	public static String getHTTP(String... params) {
+		Log.v("tdin", "Getting URL");
+		HttpUriRequest request = new HttpGet(params[0]); // Or HttpPost(), depends on your needs  
+		String credentials = "jsvgoncalves@gmail.com" + ":" + "123456";  
+		String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);  
+		request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
+
+		HttpClient httpclient = new DefaultHttpClient();  
+		try {
+			HttpResponse response = httpclient.execute(request);
+			Log.v("http", response.getStatusLine().toString());
+			return response.toString();
+		} catch(Exception e) {
+
+		}
+		return "Oops";
 	}
 	
 	protected void onPostExecute(String result) {

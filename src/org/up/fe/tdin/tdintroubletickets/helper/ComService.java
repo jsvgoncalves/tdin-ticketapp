@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class ComService extends AsyncTask<String, String, String> {
 	
-	public static String serverURL = "http://localhost/tdin-webservice";
+	public static String serverURL = "http://192.168.102.240/tdin-webservice";
 	ProgressDialog dialog;
 	String methodName;
 	Object object;
@@ -43,7 +43,8 @@ public class ComService extends AsyncTask<String, String, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
-	    return ComHelper.httpGet(params);
+	    // return ComHelper.httpGet(params);
+	    return ComHelper.getHTTP(params);
 	}
 	
 	@Override
@@ -52,6 +53,7 @@ public class ComService extends AsyncTask<String, String, String> {
 //		Log.e("mylog", "result " + result);
 //		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
+		Log.v("tdin", result);
 		if (showProgress) {
 			dialog.dismiss();
 		}
