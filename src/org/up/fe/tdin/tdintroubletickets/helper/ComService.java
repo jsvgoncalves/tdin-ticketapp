@@ -34,7 +34,6 @@ public class ComService extends AsyncTask<String, String, String> {
 	 * @param dialogMessage The dialog message string
 	 */
 	public ComService(String url, Object object, String methodName, boolean showProgress, String dialogMessage) {
-		Log.e("mylog", url );
 		String full_url = serverURL + url;
 		this.methodName = methodName;
 		this.object = object;
@@ -65,14 +64,13 @@ public class ComService extends AsyncTask<String, String, String> {
 //		String status = JSONHelper.getValue(json, "status");
 
 		String result = "----";
-		Log.v("onPostExecute()", result);
+		Log.v("onPostExecute()", response);
 		if (showProgress) {
 			dialog.dismiss();
 		}
 		try {
 			Method method = object.getClass().getMethod(methodName, String.class);
 			method.invoke(object, result);
-//			callback.invoke(object, json);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

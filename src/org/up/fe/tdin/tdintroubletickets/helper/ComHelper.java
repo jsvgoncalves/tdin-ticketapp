@@ -20,6 +20,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.util.EntityUtils;
+import org.apache.http.HttpStatus;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -87,6 +88,8 @@ public class ComHelper{
 	/**
 	 * Performs an HTTP GET Request.
 	 * @param params 0-> URL
+	 * @return  401 - If the login fails.
+	 * 			The content if all goes well
 	 */
 	public static String getHTTP(String... params) {
 		HttpClient httpclient = new DefaultHttpClient();  
@@ -99,8 +102,13 @@ public class ComHelper{
 		
 		try {
 			HttpResponse response = httpclient.execute(request);
+			// Check the response status for login.
+			if( !isLoggedIn( response.getStatusLine().getStatusCode() ) ) {
+				return "" + HttpStatus.SC_UNAUTHORIZED;
+			}
+
 			// The status of the response (eg. 200, 404)
-			//Log.v("http", response.getStatusLine().toString());
+			// Log.v("http", response.getStatusLine().getStatusCode() + "");
 			// The content of the response
 			//Log.v("http-content",  EntityUtils.toString(response.getEntity()));
 			return EntityUtils.toString(response.getEntity());
@@ -108,6 +116,14 @@ public class ComHelper{
 
 		}
 		return null;
+	}
+
+	public static boolean isLoggedIn(int status) {
+		if(status == HttpStatus.SC_UNAUTHORIZED) {
+			return false;
+		}
+
+		return true;
 	}
 	
 	public static boolean isOnline(Context context) {
