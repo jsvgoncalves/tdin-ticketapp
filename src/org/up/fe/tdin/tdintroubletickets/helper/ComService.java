@@ -10,6 +10,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONObject;
+
+
 public class ComService extends AsyncTask<String, String, String> {
 	
 	public static String serverURL = "http://192.168.102.240/tdin-webservice";
@@ -61,8 +64,8 @@ public class ComService extends AsyncTask<String, String, String> {
 	protected void onPostExecute (String response){
 //		System.out.println(result);
 //		Log.e("mylog", "result " + result);
-//		JSONObject json = JSONHelper.string2JSON(result);
-//		String status = JSONHelper.getValue(json, "status");
+		JSONObject json = JSONHelper.string2JSON(response);
+		String status = JSONHelper.getValue(json, "status");
 
 		String result = "----";
 		Log.v("onPostExecute()", response);
