@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TDIN Trouble Tickets</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <!-- Default user credentials -->
+    <string name="default_user">jsvgoncalves@gmail.com</string>
+    <string name="default_pass">123456</string>
 
-    
+    <!-- Application Information -->
+    <string name="app_name">TDIN Trouble Tickets</string>
+    <string name="action_settings">Definições</string>
+
     <!-- For dialogs -->
-	<string name="fetching_data">Fetching data</string>
+    <string name="fetching_data">A obter dados</string>
+
+    <!-- Generic -->
+    <string name="logout">Sair</string>
+    <string name="cancel">Cancelar</string>
+    <string name="refresh">Atualizar</string>
+
+    <!-- For toasts -->
+    <string name="connectionexception">Verifique a sua ligação!</string>
+    <string name="no_tickets_for_you">Bilhetes esgotados.</string>
+    <string name="no_tickets_history">Sem histórico de viagens</string>
+
+    <!-- For user forms -->
+    <string name="form_name">Nome</string>
+    <string name="form_pw">Password</string>
+    <string name="form_pw_repeat">Repetir Password</string>
+    <string name="form_email">E-mail</string>
+    <string name="login">Entrar</string>
+    <string name="register">Nova Conta</string>
+    <string name="create">Criar</string>
+
+    <!-- Forms errors -->
+    <string name="form_error_diff_pass">Palavras-passe diferentes!</string>
+    <string name="form_error_no_user">Nome de utilizador inválido!</string>
+    <string name="form_error_invalid_email">E-mail inválido!</string>
+
 </resources>
