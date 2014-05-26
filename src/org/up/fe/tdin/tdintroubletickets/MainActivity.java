@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 			MainActivity.this,
 			"loginDone",
 			true
-			); // Hide progress bar cuz we will set it manually
+			);
 	}
 
 	/**

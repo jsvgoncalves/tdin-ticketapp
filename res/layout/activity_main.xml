@@ -18,8 +18,6 @@
         android:hint="@string/form_email"
         android:inputType="textEmailAddress"
         android:text="@string/default_user" >
-
-        <requestFocus />
     </EditText>
 
     <EditText

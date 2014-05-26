@@ -56,8 +56,6 @@
             android:ems="10"
             android:hint="@string/form_email"
             android:inputType="textEmailAddress" >
-
-            <requestFocus />
         </EditText>
 
         <EditText
