@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 	 */
 	public void loginClick(View v){
 		// Log.d("loginClick()", "...");
+		// TODO: pass parameters
 		new ComService(
 			"/",
 			MainActivity.this,
@@ -57,6 +58,11 @@ public class MainActivity extends Activity {
 	 * Callback method for login communication.
 	 */
 	public void loginDone(String result) {
+		// Prevents exceptions
+		if(result == null) {
+			result = "";
+		}
+
 		Log.d("loginDone()", "Have I logged in?");
 		Log.d("loginDone():result", result);
 
@@ -71,6 +77,8 @@ public class MainActivity extends Activity {
 			startActivity(home_intent);
 		} else {
 			// Show an error
+			Log.d("loginDone()", "failed login");
+			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 		}
 	}
 

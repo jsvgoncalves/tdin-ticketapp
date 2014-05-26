@@ -64,10 +64,10 @@ public class ComService extends AsyncTask<String, String, String> {
 	protected void onPostExecute (String response){
 //		System.out.println(result);
 //		Log.e("mylog", "result " + result);
-		JSONObject json = JSONHelper.string2JSON(response);
-		String status = JSONHelper.getValue(json, "status");
+		// JSONObject json = JSONHelper.string2JSON(response);
+		// String status = JSONHelper.getValue(json, "status");
 
-		Log.v("onPostExecute()", response);
+		// Log.v("onPostExecute()", response);
 		if (showProgress) {
 			dialog.dismiss();
 		}
