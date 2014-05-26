@@ -87,7 +87,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/app_btn_style"
-                android:onClick="cancelAction"
+                android:onClick="cancelClick"
                 android:padding="10dp"
                 android:text="@string/cancel"
                 android:textColor="@drawable/app_btn_style" />
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/app_btn_style"
-                android:onClick="createAccountAction"
+                android:onClick="registerClick"
                 android:padding="10dp"
                 android:text="@string/create"
                 android:textColor="@drawable/app_btn_style" />

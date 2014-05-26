@@ -13,50 +13,48 @@ import android.widget.TextView;
 
 public class RegisterActivity extends Activity{
 
+	TextView name_txt;
+	TextView email_txt;
+	TextView password_txt;
+	TextView password_repeat_txt;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		addListeners();
+		initFieldVars();
 	}
 
 	/**
 	 * Add Listeners to buttons in view
 	 */
-	private void addListeners() {
-
-
+	private void initFieldVars() {
 		//Textviews that contain all the data
-		final TextView name_txt = (TextView)findViewById(R.id.form_name);
-		final TextView email_txt = (TextView) findViewById(R.id.form_email);
-		final TextView password_txt = (TextView) findViewById(R.id.form_pw);
-		final TextView password_repeat_txt = (TextView) findViewById(R.id.form_pw2);
+		name_txt = (TextView)findViewById(R.id.form_name);
+		email_txt = (TextView) findViewById(R.id.form_email);
+		password_txt = (TextView) findViewById(R.id.form_pw);
+		password_repeat_txt = (TextView) findViewById(R.id.form_pw2);
+	}
 
-		//button used to create account
-		Button create_btn = (Button)findViewById(R.id.button_createAccount);
-		create_btn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//TODO: Register account on server
-				if(name_txt.getText().toString().length() == 0){
-					showError(getString(R.string.form_error_no_user)); //empty user name
-				}else if(!isValidEmail(email_txt.getText().toString())){
-					showError(getString(R.string.form_error_invalid_email)); //invalid email
-				}else if(!password_txt.getText().toString().equals(password_repeat_txt.getText().toString())){
-					showError(getString(R.string.form_error_diff_pass)); //show different passwords error
-				} 
-			}
-		});
+	/**
+	 * Cancel button click handler
+	 */
+	public void cancelClick(View v) {
+		finish();
+	}
 
-		//buton used to cancel account registration
-		Button cancel_btn = (Button)findViewById(R.id.button_cancel_register);
-		cancel_btn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-
+	/**
+	 * Register button click handler
+	 */
+	public void registerClick(View v) {
+		//TODO: Register account on server
+		if( name_txt.getText().toString().length() == 0 ){
+			showError( getString(R.string.form_error_no_user) ); //empty user name
+		} else if( !isValidEmail(email_txt.getText().toString()) ){
+			showError( getString(R.string.form_error_invalid_email) ); //invalid email
+		} else if( !password_txt.getText().toString().equals(password_repeat_txt.getText().toString()) ){
+			showError( getString(R.string.form_error_diff_pass) ); //show different passwords error
+		} 
 	}
 
 	/*
