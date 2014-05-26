@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	ProgressDialog dialog;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,25 +32,20 @@ public class MainActivity extends Activity {
 	 * Login button handler
 	 */
 	public void loginClick(View v){
-		Log.d("loginClick()", "yey");
-		try {
-			new ComService(
-					"/", 
-					MainActivity.this, 
-					"loginDone",
-					false
-					); // Hide progress bar cuz we will set it manually
-		} catch (Exception e) {
-			Toast toast = Toast.makeText(MainActivity.this, getString(R.string.connectionexception), Toast.LENGTH_SHORT);
-			toast.show();
-		}
+		// Log.d("loginClick()", "...");
+		new ComService(
+			"/",
+			MainActivity.this,
+			"loginDone",
+			true
+			); // Hide progress bar cuz we will set it manually
 	}
 
 	/**
 	 * Register button handler
 	 */
 	public void registerClick(View v){
-		Log.d("registerClick()", "yey");
+		// Log.d("registerClick()", "...");
 		Intent register_intent = new Intent(MainActivity.this, RegisterActivity.class);
 		startActivity(register_intent);
 	}
