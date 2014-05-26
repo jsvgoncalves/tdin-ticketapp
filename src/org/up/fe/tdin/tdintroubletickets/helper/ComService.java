@@ -67,14 +67,13 @@ public class ComService extends AsyncTask<String, String, String> {
 		JSONObject json = JSONHelper.string2JSON(response);
 		String status = JSONHelper.getValue(json, "status");
 
-		String result = "----";
 		Log.v("onPostExecute()", response);
 		if (showProgress) {
 			dialog.dismiss();
 		}
 		try {
 			Method method = object.getClass().getMethod(methodName, String.class);
-			method.invoke(object, result);
+			method.invoke(object, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
