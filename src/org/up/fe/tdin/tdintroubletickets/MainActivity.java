@@ -25,8 +25,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		tdin = (TDINTroubleTickets) getApplication();
+		if(!tdin.hasLoadedPrefs() || tdin.isLoggedOut()) {
+			setContentView(R.layout.activity_main);
+			// Restore user prefs to the form.
+		} else {
+			startHome();
+		}
 	}
 
 	@Override
@@ -99,10 +104,7 @@ public class MainActivity extends Activity {
 
 		// If the login was successfull
 		if(status.equals("ok")) {
-			// Start the new activity.
-			Intent home_intent = new Intent(MainActivity.this, HomeActivity.class);
-			startActivity(home_intent);
-			finish(); // Finishes this activity.
+			startHome();
 		} else {
 			// Show an error
 			Log.d("loginDone()", "failed login");
@@ -112,4 +114,10 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void startHome() {
+		// Start the new activity.
+		Intent home_intent = new Intent(MainActivity.this, HomeActivity.class);
+		startActivity(home_intent);
+		finish(); // Finishes this activity.
+	}
 }

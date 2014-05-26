@@ -21,6 +21,7 @@ public class TDINTroubleTickets extends Application {
 
 	private String email;
 	private String pw;
+	private boolean loggedOut = true;
 	
 	private boolean loadedPrefs = false;
 	private String lastUpdate;
@@ -48,7 +49,7 @@ public class TDINTroubleTickets extends Application {
 
 		String email = settings.getString("email", "notset");
 		String pw = settings.getString("pw", "notset");
-		// boolean loggedOut = settings.getBoolean("loggedOut", true);
+		boolean loggedOut = settings.getBoolean("loggedOut", true);
 
 		try {
 			// Are the values not set?
@@ -58,6 +59,7 @@ public class TDINTroubleTickets extends Application {
 			// If all values are set, set them in the app context.
 			setEmail(email);
 			setPw(pw);
+			setLoggedOut(loggedOut);
 			return true;
 		} catch (ParseException e) {
 			return false;
@@ -77,6 +79,7 @@ public class TDINTroubleTickets extends Application {
 
 		editor.putString("email", email);
 		editor.putString("pw", pw);
+		editor.putBoolean("loggedOut", loggedOut);
 
 		// Commit the edits!
 		editor.commit();
@@ -103,5 +106,21 @@ public class TDINTroubleTickets extends Application {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public void setLoggedOut(boolean loggedOut) {
+		this.loggedOut = loggedOut;  
+	}
+
+	public boolean isLoggedOut() {
+		return loggedOut;
+	}
+
+	public boolean hasLoadedPrefs() {
+		return loadedPrefs;
+	}
+
+	public void setLoadedPrefs(boolean loadedPrefs) {
+		this.loadedPrefs = loadedPrefs;
 	}
 }
