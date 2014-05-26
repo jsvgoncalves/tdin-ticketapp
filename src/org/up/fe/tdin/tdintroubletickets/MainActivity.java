@@ -1,6 +1,7 @@
 package org.up.fe.tdin.tdintroubletickets;
 
 import org.up.fe.tdin.tdintroubletickets.helper.ComService;
+import org.up.fe.tdin.tdintroubletickets.helper.JSONHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 public class MainActivity extends Activity {
 
@@ -55,6 +58,20 @@ public class MainActivity extends Activity {
 	 */
 	public void loginDone(String result) {
 		Log.d("loginDone()", "Have I logged in?");
+		Log.d("loginDone():result", result);
+
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		Log.d("loginDone():status", status);
+
+		// If the login was successfull
+		if(status.equals("ok")) {
+			// Start the new activity.
+			Intent home_intent = new Intent(MainActivity.this, HomeActivity.class);
+			startActivity(home_intent);
+		} else {
+			// Show an error
+		}
 	}
 
 }
