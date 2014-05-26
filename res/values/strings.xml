@@ -7,33 +7,31 @@
 
     <!-- Application Information -->
     <string name="app_name">TDIN Trouble Tickets</string>
-    <string name="action_settings">Definições</string>
+    <string name="action_settings">Settings</string>
 
     <!-- For dialogs -->
-    <string name="fetching_data">A obter dados</string>
+    <string name="fetching_data">Fetching data</string>
 
     <!-- Generic -->
-    <string name="logout">Sair</string>
-    <string name="cancel">Cancelar</string>
-    <string name="refresh">Atualizar</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="refresh">Refresh</string>
 
     <!-- For toasts -->
-    <string name="connectionexception">Verifique a sua ligação!</string>
-    <string name="no_tickets_for_you">Bilhetes esgotados.</string>
-    <string name="no_tickets_history">Sem histórico de viagens</string>
+    <string name="connectionexception">Failed connection!</string>
 
     <!-- For user forms -->
-    <string name="form_name">Nome</string>
+    <string name="form_name">Name</string>
     <string name="form_pw">Password</string>
-    <string name="form_pw_repeat">Repetir Password</string>
+    <string name="form_pw_repeat">Repeat Password</string>
     <string name="form_email">E-mail</string>
-    <string name="login">Entrar</string>
-    <string name="register">Nova Conta</string>
-    <string name="create">Criar</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="create">Create</string>
 
     <!-- Forms errors -->
-    <string name="form_error_diff_pass">Palavras-passe diferentes!</string>
-    <string name="form_error_no_user">Nome de utilizador inválido!</string>
-    <string name="form_error_invalid_email">E-mail inválido!</string>
+    <string name="form_error_diff_pass">Passwords do not match!</string>
+    <string name="form_error_no_user">Invalid username!</string>
+    <string name="form_error_invalid_email">Invalid e-mail!</string>
 
 </resources>
