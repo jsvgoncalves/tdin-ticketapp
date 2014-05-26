@@ -12,6 +12,7 @@
         android:targetSdkVersion="19" />
 
     <application
+        android:name="org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
