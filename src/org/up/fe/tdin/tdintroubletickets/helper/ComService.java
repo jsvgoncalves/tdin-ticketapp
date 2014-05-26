@@ -8,10 +8,13 @@ import org.up.fe.tdin.tdintroubletickets.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.app.Activity;
+import android.app.Application;
 import android.util.Log;
 
 import org.json.JSONObject;
 
+import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
 
 public class ComService extends AsyncTask<String, String, String> {
 	
@@ -21,6 +24,7 @@ public class ComService extends AsyncTask<String, String, String> {
 	String methodName;
 	Object object;
 	boolean showProgress;
+	TDINTroubleTickets tdin;
 	
 	@Override
 	protected void onPreExecute(){}
@@ -38,11 +42,13 @@ public class ComService extends AsyncTask<String, String, String> {
 	 * @param dialogMessage The dialog message string
 	 */
 	public ComService(String url, Object object, String methodName, boolean showProgress, String dialogMessage) {
+		tdin = (TDINTroubleTickets)((Context) object).getApplicationContext();
 		String full_url = serverURL + url + extensionURL;
 		this.methodName = methodName;
 		this.object = object;
-		this.execute(full_url);
+		this.execute(full_url, tdin.getEmail(), tdin.getPw());
 		this.showProgress = showProgress;
+
 
 		//set message of the dialog
 		if (showProgress) {

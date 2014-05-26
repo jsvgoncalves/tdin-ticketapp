@@ -76,6 +76,8 @@ public class ComHelper{
 	/**
 	 * Performs an HTTP GET Request.
 	 * @param params 0-> URL
+	 *				 1 -> email
+	 *				 2 -> pw
 	 * @return  401 - If the login fails.
 	 * 			The content if all goes well
 	 */
@@ -84,7 +86,9 @@ public class ComHelper{
 		HttpUriRequest request = new HttpGet(params[0]); // Or HttpPost(), depends on your needs  
 
 		// The authorization part
-		String credentials = "jsvgoncalves@gmail.com" + ":" + "123456";  
+		Log.d("getHTTP():param[1]", params[1]);
+		Log.d("getHTTP():param[2]", params[2]);
+		String credentials = params[1] + ":" + params[2];
 		String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);  
 		request.addHeader("Authorization", "Basic " + base64EncodedCredentials);
 		

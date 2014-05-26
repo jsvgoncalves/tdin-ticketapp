@@ -18,6 +18,9 @@ public class TDINTroubleTickets extends Application {
 
 	private static TDINTroubleTickets instance;
 	private static boolean hasLogin = false;
+
+	private String email;
+	private String pw;
 	
 	private boolean loadedPrefs = false;
 	private String lastUpdate;
@@ -43,23 +46,22 @@ public class TDINTroubleTickets extends Application {
 	private boolean checkSharedPrefs() {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 
-		// String userid = settings.getString("userid", "notset");
+		String email = settings.getString("email", "notset");
+		String pw = settings.getString("pw", "notset");
 		// boolean loggedOut = settings.getBoolean("loggedOut", true);
 
-		//try {
-			// if( name.equals("notset") || email.equals("notset") || pw.equals("notset") || 
-			// 	userid.equals("notset") || token.equals("notset") || date.equals("1999-12-12 00:00:00") ) {
-			// 	throw new ParseException("Parse exception", 0);
-			// }
-			//Date sharedDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(date);
-
-			//setName(name);
-			//setLoggedOut(loggedOut);
-			//this.lastUpdate = lastUpdate;
+		try {
+			// Are the values not set?
+			if( email.equals("notset") || pw.equals("notset")){
+				throw new ParseException("Parse exception", 0);
+			}
+			// If all values are set, set them in the app context.
+			setEmail(email);
+			setPw(pw);
 			return true;
-		//} catch (ParseException e) {
-		//	return false;
-		//}
+		} catch (ParseException e) {
+			return false;
+		}
 	}
 
 
@@ -73,15 +75,8 @@ public class TDINTroubleTickets extends Application {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = settings.edit();
 
-		// editor.putString("userid", user_id);
-		// editor.putString("name", name);
-		// editor.putString("email", email);
-		// editor.putString("realEmail", realEmail);
-		// editor.putString("pw", pw);
-		// editor.putString("token", token);
-		// editor.putBoolean("loggedOut", loggedOut);
-		// SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format), Locale.getDefault());
-		// editor.putString("expirationDate", dFormat.format(expirationDate).toString());
+		editor.putString("email", email);
+		editor.putString("pw", pw);
 
 		// Commit the edits!
 		editor.commit();
@@ -94,17 +89,19 @@ public class TDINTroubleTickets extends Application {
 		defaultPrefsPut.commit();
 	}
 
-	public void saveLastUpdate() {
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor editor = settings.edit();
-		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format), Locale.getDefault());
-		String lastUpdate = dFormat.format(new Date()).toString();
-		editor.putString("lastUpdate", lastUpdate);
-		editor.commit();
-		this.lastUpdate = lastUpdate;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getLastUpdate() {
-		return lastUpdate;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 }

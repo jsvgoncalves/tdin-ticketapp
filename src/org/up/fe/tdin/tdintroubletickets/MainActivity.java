@@ -1,5 +1,6 @@
 package org.up.fe.tdin.tdintroubletickets;
 
+import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
 import org.up.fe.tdin.tdintroubletickets.helper.ComService;
 import org.up.fe.tdin.tdintroubletickets.helper.JSONHelper;
 
@@ -13,15 +14,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.EditText;
 
 import org.json.JSONObject;
 
 public class MainActivity extends Activity {
 
+	TDINTroubleTickets tdin;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		tdin = (TDINTroubleTickets) getApplication();
 	}
 
 	@Override
@@ -36,12 +41,34 @@ public class MainActivity extends Activity {
 	 */
 	public void loginClick(View v){
 		// Log.d("loginClick()", "...");
-		// TODO: pass parameters
+		// Disable the button
+		v.setEnabled(false);
+		// Disable the register button
+		Button createAccbt = (Button) findViewById(R.id.button_register);
+		createAccbt.setEnabled(false);
+		String email = ((EditText) findViewById(R.id.form_email)).getText().toString();
+		String pw = ((EditText) findViewById(R.id.form_pw)).getText().toString();
+
+		if (!email.equals("") && !pw.equals("")) {
+			tdin.setEmail(email);
+			tdin.setPw(pw);
+			//tdin.setPw(md5Helper.hashMD5(pw));
+			doLogin();
+		} else {
+			v.setEnabled(true);
+			createAccbt.setEnabled(true);
+		}
+	}
+
+	/**
+	 * Performs the login communication action.
+	 */
+	public void doLogin() {
 		new ComService(
-			"/",
-			MainActivity.this,
-			"loginDone",
-			true
+			"/", // route
+			MainActivity.this, // this context
+			"loginDone", // callback
+			true // show progress bar
 			);
 	}
 
@@ -75,10 +102,13 @@ public class MainActivity extends Activity {
 			// Start the new activity.
 			Intent home_intent = new Intent(MainActivity.this, HomeActivity.class);
 			startActivity(home_intent);
+			finish(); // Finishes this activity.
 		} else {
 			// Show an error
 			Log.d("loginDone()", "failed login");
 			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+			findViewById(R.id.button_login).setEnabled(true);
+			findViewById(R.id.button_register).setEnabled(true);
 		}
 	}
 
