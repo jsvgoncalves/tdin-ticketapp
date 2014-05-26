@@ -49,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/app_btn_style"
-            android:onClick="loginAction"
+            android:onClick="loginClick"
             android:padding="10dp"
             android:text="@string/login"
             android:textColor="@drawable/app_btn_style" />
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/app_btn_style"
-            android:onClick="registerAction"
+            android:onClick="registerClick"
             android:padding="10dp"
             android:text="@string/register"
             android:textColor="@drawable/app_btn_style" />

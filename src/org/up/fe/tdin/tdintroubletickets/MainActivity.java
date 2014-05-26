@@ -21,8 +21,22 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		// Try to login //Crashing here
-		/*try {
+		addListeners();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	/**
+	 * Login button handler
+	 */
+	public void loginClick(View v){
+		Log.d("loginClick()", "yey");
+		try {
 			new ComService(
 					"/", 
 					MainActivity.this, 
@@ -32,45 +46,23 @@ public class MainActivity extends Activity {
 		} catch (Exception e) {
 			Toast toast = Toast.makeText(MainActivity.this, getString(R.string.connectionexception), Toast.LENGTH_SHORT);
 			toast.show();
-		}*/
-		addListeners();
+		}
 	}
 
 	/**
-	 * Add listeners for button clicks (Login and register)
+	 * Register button handler
 	 */
-	private void addListeners() {
-		//button used navigate to registration activity
-		Button register_btn = (Button)findViewById(R.id.button_register);
-		register_btn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent register_intent = new Intent(MainActivity.this, RegisterActivity.class);
-				startActivity(register_intent);
-			}
-		});
-
-		//button used to login and navigate to main activity
-		Button login_btn = (Button)findViewById(R.id.button_login);
-		login_btn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//TODO: Login on service
-			}
-		});
-
+	public void registerClick(View v){
+		Log.d("registerClick()", "yey");
+		Intent register_intent = new Intent(MainActivity.this, RegisterActivity.class);
+		startActivity(register_intent);
 	}
 
+	/**
+	 * Callback method for login communication.
+	 */
 	public void loginDone(String result) {
-		Log.d("loginDone()", "I've logged in");
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		Log.d("loginDone()", "Have I logged in?");
 	}
 
 }
