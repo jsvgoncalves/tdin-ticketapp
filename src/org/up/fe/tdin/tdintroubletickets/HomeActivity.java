@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
+import org.up.fe.tdin.tdintroubletickets.model.User;
+import org.up.fe.tdin.tdintroubletickets.model.Ticket;
 import org.up.fe.tdin.tdintroubletickets.helper.ComService;
 import org.up.fe.tdin.tdintroubletickets.helper.JSONHelper;
 
@@ -49,10 +51,23 @@ public class HomeActivity extends Activity {
 
 	private void initList() {
 		ticketsArray = new ArrayList<Map<String,String>>();
-		HashMap<String, String> ticketItem = new HashMap<String, String>();
-		ticketItem.put("first-line", "No tickets");
-		ticketItem.put("second-line", "You have not been assigned any trouble tickets.");
-		ticketsArray.add(ticketItem);
+
+		// If there is no history just show a message
+		if (User.userTickets.isEmpty()) {
+			HashMap<String, String> ticketItem = new HashMap<String, String>();
+			ticketItem.put("first-line", "No tickets");
+			ticketItem.put("second-line", "You have not been assigned any trouble tickets.");
+			ticketsArray.add(ticketItem);
+		} else { // Else lets add ticketItems
+			// Each Map is one List entry with 2 lines
+			for (Ticket ticket : User.userTickets) {
+				HashMap<String, String> ticketItem = new HashMap<String, String>();
+				ticketItem.put("first-line", "T" + ticket.ticket_type);
+				ticketItem.put("second-line", ticket.uuid);
+				ticketItem.put("id", ticket.id + "");
+				ticketsArray.add(ticketItem);
+			}
+		}
 
 		ListView lv = (ListView) findViewById(R.id.history_list_view);
 		simpleAdpt = new SimpleAdapter(this, ticketsArray, android.R.layout.simple_list_item_2,
@@ -63,8 +78,10 @@ public class HomeActivity extends Activity {
 		// Create a message handling object as an anonymous class.
 		OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
 			public void onItemClick(AdapterView parent, View v, int position, long id) {
-				// Do something in response to the click
-				// Log.e("mylog", "clicked a ticket " + position);
+				Log.d("initList()", "clicked a ticket " + position);
+				// Intent intent = new Intent(HistoryActivity.this, UsedTicketQRActivity.class);
+				// intent.putExtra("position", position + "");
+				// startActivity(intent);
 			}
 		};
 
