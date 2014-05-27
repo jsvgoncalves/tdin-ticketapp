@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 	 */
 	public void doLogin() {
 		new ComService(
-			"/", // route
+			"/mobileLogin", // route
 			MainActivity.this, // this context
 			"loginDone", // callback
 			true // show progress bar
