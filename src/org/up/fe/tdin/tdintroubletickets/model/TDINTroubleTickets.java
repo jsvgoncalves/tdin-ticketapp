@@ -28,7 +28,7 @@ public class TDINTroubleTickets extends Application {
 
 	@Override
 	public void onCreate() {
-		Log.v("TDINTroubleTickets:onCreate()", "...");
+		//Log.v("TDINTroubleTickets:onCreate()", "...");
 		super.onCreate();
 		instance = this;
 

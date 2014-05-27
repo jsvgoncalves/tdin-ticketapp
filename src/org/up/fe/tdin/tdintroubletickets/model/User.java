@@ -101,11 +101,12 @@ public class User {
 		for (String ticketStr : tickets_str) {
 			json = JSONHelper.string2JSON(ticketStr);
 			try {
-				Ticket t = new Ticket(json.getString("id"),
-						json.getString("ticket_type"),
+				Ticket t = new Ticket(Integer.parseInt(json.getString("id")),
+						Integer.parseInt(json.getString("ticket_type")),
 						json.getString("uuid"),
 						json.getString("created_at"),
-						json.getString("updated_at"));
+						json.getString("updated_at"),
+						json.getString("title"));
 				tickets.add(t);
 			} catch (JSONException e) {
 				System.err.println(e.toString());

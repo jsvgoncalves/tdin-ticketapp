@@ -30,10 +30,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		tdin = (TDINTroubleTickets) getApplication();
 		// DEBUG - add ticket
-		// Ticket ticket = new Ticket(123, 1, "uuid", "created_at", "updated_at");
+		// Ticket ticket = new Ticket(123, 1, "uuid", "created_at", "updated_at", "title");
 		// User.userTickets.add(ticket);
 		// User.updateTicketsDB(this);
-
+		// DEBUG - clear table
 		// TicketsDataSource db = new TicketsDataSource(this);
 		// db.clearTickets();
 
