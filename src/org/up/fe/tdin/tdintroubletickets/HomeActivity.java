@@ -7,25 +7,15 @@ import java.util.Map;
 import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
 import org.up.fe.tdin.tdintroubletickets.model.User;
 import org.up.fe.tdin.tdintroubletickets.model.Ticket;
-import org.up.fe.tdin.tdintroubletickets.helper.ComService;
-import org.up.fe.tdin.tdintroubletickets.helper.JSONHelper;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Button;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 public class HomeActivity extends Activity {
 

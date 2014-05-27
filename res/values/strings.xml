@@ -34,4 +34,18 @@
     <string name="form_error_no_user">Invalid username!</string>
     <string name="form_error_invalid_email">Invalid e-mail!</string>
 
+    <!-- Default values -->
+    <string name="default_title">Title</string>
+    <string name="default_description">This is a brief example description, just to show how a long description is presented on the screen</string>
+    <string name="default_name">User Name</string>
+    <string name="default_email">email@email.com</string>
+    <string name="default_date">27/05/2014 at 19:00:24</string>
+    <string name="default_id">0JD813JJIQW8HDUasdqwqdqwdqw1</string>
+
+    <!-- Prefixes -->
+    <string name="pre_name">Submited by:</string>
+    <string name="pre_email">Email:</string>
+    <string name="pre_date">Date:</string>
+    <string name="pre_id">ID:</string>
+
 </resources>
