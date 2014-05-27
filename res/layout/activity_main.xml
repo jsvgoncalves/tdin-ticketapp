@@ -50,7 +50,9 @@
             android:onClick="loginClick"
             android:padding="10dp"
             android:text="@string/login"
-            android:textColor="@drawable/app_btn_style" />
+            android:textColor="@drawable/app_btn_style">
+            <requestFocus />
+        </Button>
 
         <Button
             android:id="@+id/button_register"

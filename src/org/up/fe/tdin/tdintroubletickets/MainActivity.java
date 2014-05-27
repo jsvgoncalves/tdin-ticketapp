@@ -1,6 +1,9 @@
 package org.up.fe.tdin.tdintroubletickets;
 
 import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
+import org.up.fe.tdin.tdintroubletickets.model.User;
+import org.up.fe.tdin.tdintroubletickets.model.Ticket;
+import org.up.fe.tdin.tdintroubletickets.helper.TicketsDataSource;
 import org.up.fe.tdin.tdintroubletickets.helper.ComService;
 import org.up.fe.tdin.tdintroubletickets.helper.JSONHelper;
 
@@ -26,6 +29,14 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		tdin = (TDINTroubleTickets) getApplication();
+		// DEBUG - add ticket
+		// Ticket ticket = new Ticket(123, 1, "uuid", "created_at", "updated_at");
+		// User.userTickets.add(ticket);
+		// User.updateTicketsDB(this);
+
+		// TicketsDataSource db = new TicketsDataSource(this);
+		// db.clearTickets();
+
 		if(!tdin.hasLoadedPrefs() || tdin.isLoggedOut()) {
 			setContentView(R.layout.activity_main);
 			// Restore user prefs to the form.
