@@ -20,6 +20,7 @@ public class TDINTroubleTickets extends Application {
 	private static boolean hasLogin = false;
 
 	private String email;
+	private String uuid;
 	private String pw;
 	private boolean loggedOut = true;
 	
@@ -49,16 +50,18 @@ public class TDINTroubleTickets extends Application {
 
 		String email = settings.getString("email", "notset");
 		String pw = settings.getString("pw", "notset");
+		String uuid = settings.getString("uuid", "notset");
 		boolean loggedOut = settings.getBoolean("loggedOut", true);
 
 		try {
 			// Are the values not set?
-			if( email.equals("notset") || pw.equals("notset")){
+			if( email.equals("notset") || pw.equals("notset") || uuid.equals("notset")){
 				throw new ParseException("Parse exception", 0);
 			}
 			// If all values are set, set them in the app context.
 			setEmail(email);
 			setPw(pw);
+			setUUID(uuid);
 			setLoggedOut(loggedOut);
 			return true;
 		} catch (ParseException e) {
@@ -79,6 +82,7 @@ public class TDINTroubleTickets extends Application {
 
 		editor.putString("email", email);
 		editor.putString("pw", pw);
+		editor.putString("uuid", uuid);
 		editor.putBoolean("loggedOut", loggedOut);
 
 		// Commit the edits!
@@ -98,6 +102,14 @@ public class TDINTroubleTickets extends Application {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUUID() {
+		return uuid;
+	}
+
+	public void setUUID(String uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getPw() {
