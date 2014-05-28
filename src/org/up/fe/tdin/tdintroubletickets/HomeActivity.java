@@ -7,8 +7,10 @@ import java.util.Map;
 import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
 import org.up.fe.tdin.tdintroubletickets.model.User;
 import org.up.fe.tdin.tdintroubletickets.model.Ticket;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -69,9 +71,9 @@ public class HomeActivity extends Activity {
 		OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
 			public void onItemClick(AdapterView parent, View v, int position, long id) {
 				Log.d("initList()", "clicked a ticket " + position);
-				// Intent intent = new Intent(HistoryActivity.this, UsedTicketQRActivity.class);
-				// intent.putExtra("position", position + "");
-				// startActivity(intent);
+				Intent intent = new Intent(HomeActivity.this, TicketActivity.class);
+				intent.putExtra("position", position + "");
+				startActivity(intent);
 			}
 		};
 
