@@ -42,10 +42,13 @@
     <string name="default_date">27/05/2014 at 19:00:24</string>
     <string name="default_id">0JD813JJIQW8HDUasdqwqdqwdqw1</string>
 
-    <!-- Prefixes -->
+    <!-- Prefixes (Ticket)-->
     <string name="pre_name">Submited by:</string>
     <string name="pre_email">Email:</string>
     <string name="pre_date">Date:</string>
     <string name="pre_id">ID:</string>
 
+    <!-- Ticket Buttons -->
+     <string name="btn_reply">Reply</string>
+     <string name="btn_create_secondary">Create Secondary Ticket</string>
 </resources>
