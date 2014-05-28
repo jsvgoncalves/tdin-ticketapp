@@ -24,6 +24,7 @@ import org.json.JSONObject;
 public class MainActivity extends Activity {
 
 	TDINTroubleTickets tdin;
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +81,18 @@ public class MainActivity extends Activity {
 	 * Performs the login communication action.
 	 */
 	public void doLogin() {
+		// new progressbar
 		new ComService(
 			"/mobileLogin", // route
 			MainActivity.this, // this context
 			"loginDone", // callback
-			true // show progress bar
+			false // show progress bar
 			);
+		dialog = new ProgressDialog(this);
+		dialog.setMessage(getString(R.string.fetching_data));
+		dialog.setCancelable(false);
+		dialog.show();
+
 	}
 
 	/**
@@ -115,9 +122,15 @@ public class MainActivity extends Activity {
 
 		// If the login was successfull
 		if(status.equals("ok")) {
-			startHome();
+			//startHome();
+			// GET [user][User][id];
+			String uuid = JSONHelper.getValue(json, "user", "User", "id");
+			//String uuid = "[user][User][id]";
+			tdin.setUUID(uuid);
+			fetchTickets();
 		} else {
 			// Show an error
+			dialog.dismiss();
 			Log.d("loginDone()", "failed login");
 			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 			findViewById(R.id.button_login).setEnabled(true);
@@ -130,5 +143,40 @@ public class MainActivity extends Activity {
 		Intent home_intent = new Intent(MainActivity.this, HomeActivity.class);
 		startActivity(home_intent);
 		finish(); // Finishes this activity.
+	}
+
+	public void fetchTickets() {
+		// Comservice
+		new ComService(
+			"/users/view/" + tdin.getUUID(), // route
+			MainActivity.this, // this context
+			"fetchedTickets", // callback
+			false // show progress bar
+			);
+		// fetchedTickets()
+	}
+
+	public void fetchedTickets(String result) {
+		// If all is good
+		// 1st - save the tickets to the db.
+		Log.d("fetchedTickets():result", result);
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		// If the login was successfull
+		if(status.equals("ok")) {
+			//startHome();
+			dialog.dismiss();
+			// parseTickets();
+			// fetchUnassignedTickets();
+			startHome(); // move this to fetch unassigned
+			// Fetch unassigned tickets
+		} else {
+			// Show an error
+			dialog.dismiss();
+			Log.d("loginDone()", "failed login");
+			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+			findViewById(R.id.button_login).setEnabled(true);
+			findViewById(R.id.button_register).setEnabled(true);
+		}
 	}
 }

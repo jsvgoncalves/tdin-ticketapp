@@ -18,7 +18,8 @@ import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
 
 public class ComService extends AsyncTask<String, String, String> {
 	
-	public static String serverURL = "http://ticket.algumavez.com/";
+	// public static String serverURL = "http:// ticket.algumavez.com/";
+	public static String serverURL = "http://192.168.102.240/tdin-webservice/";
 	public static String extensionURL = ".json";
 	ProgressDialog dialog;
 	String methodName;
