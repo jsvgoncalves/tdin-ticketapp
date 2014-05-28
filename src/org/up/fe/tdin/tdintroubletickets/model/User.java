@@ -87,12 +87,12 @@ public class User {
 	}
 	
 	public static void parseTickets(JSONObject json) {
-		ArrayList<String> t1 = JSONHelper.getArray(json, "user", "tickets", "t1");
-		ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
+		ArrayList<String> userT = JSONHelper.getArray(json, "user", "Ticket");
+		// ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
 		
 		
-		parseTicketArray(t1, unassignedTickets);
-		parseTicketArray(t2, userTickets);
+		// parseTicketArray(t1, unassignedTickets);
+		parseTicketArray(userT, userTickets);
 	}
 
 	private static void parseTicketArray(ArrayList<String> tickets_str, ArrayList<Ticket> tickets) {
@@ -101,11 +101,11 @@ public class User {
 		for (String ticketStr : tickets_str) {
 			json = JSONHelper.string2JSON(ticketStr);
 			try {
-				Ticket t = new Ticket(Integer.parseInt(json.getString("id")),
-						Integer.parseInt(json.getString("ticket_type")),
-						json.getString("uuid"),
-						json.getString("created_at"),
-						json.getString("updated_at"),
+				Ticket t = new Ticket(0,
+						0,
+						json.getString("id"),
+						json.getString("created"),
+						json.getString("modified"),
 						json.getString("title"));
 				tickets.add(t);
 			} catch (JSONException e) {

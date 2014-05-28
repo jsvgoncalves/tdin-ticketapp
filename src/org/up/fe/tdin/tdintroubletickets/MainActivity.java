@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
 	public void fetchTickets() {
 		// Comservice
 		new ComService(
-			"/users/view/" + tdin.getUUID(), // route
+			"users/view/" + tdin.getUUID(), // route
 			MainActivity.this, // this context
 			"fetchedTickets", // callback
 			false // show progress bar
@@ -164,12 +164,49 @@ public class MainActivity extends Activity {
 		String status = JSONHelper.getValue(json, "status");
 		// If the login was successfull
 		if(status.equals("ok")) {
-			//startHome();
-			dialog.dismiss();
+			
+			// Parse the tickets
 			// parseTickets();
-			// fetchUnassignedTickets();
-			startHome(); // move this to fetch unassigned
+			//User.parseTickets(json);
+			//User.updateTicketsDB(this);
+
 			// Fetch unassigned tickets
+			fetchUnassignedTickets();
+		} else {
+			// Show an error
+			dialog.dismiss();
+			Log.d("loginDone()", "failed login");
+			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+			findViewById(R.id.button_login).setEnabled(true);
+			findViewById(R.id.button_register).setEnabled(true);
+		}
+	}
+
+	public void fetchUnassignedTickets() {
+		// Comservice
+		new ComService(
+			"users/view/" + tdin.getUUID(), // route
+			MainActivity.this, // this context
+			"fetchedUnassignedTickets", // callback
+			false // show progress bar
+			);
+	}
+
+	public void fetchedUnassignedTickets(String result) {
+		// If all is good
+		// 1st - save the tickets to the db.
+		Log.d("fetchedUnassignedTickets():result", result);
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		// If the login was successfull
+		if(status.equals("ok")) {
+			
+			// Parse the tickets
+			User.parseTickets(json);
+			User.updateTicketsDB(this);
+
+			// parseTickets();
+			startHome();
 		} else {
 			// Show an error
 			dialog.dismiss();

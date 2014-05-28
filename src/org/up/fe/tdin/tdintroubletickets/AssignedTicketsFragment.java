@@ -48,7 +48,7 @@ public class AssignedTicketsFragment  extends android.support.v4.app.Fragment{
 			// Each Map is one List entry with 2 lines
 			for (Ticket ticket : User.userTickets) {
 				HashMap<String, String> ticketItem = new HashMap<String, String>();
-				ticketItem.put("first-line", "T" + ticket.ticket_type);
+				ticketItem.put("first-line", ticket.title);
 				ticketItem.put("second-line", ticket.uuid);
 				ticketItem.put("id", ticket.id + "");
 				ticketsArray.add(ticketItem);
