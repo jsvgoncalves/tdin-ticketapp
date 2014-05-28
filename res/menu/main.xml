@@ -5,14 +5,4 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
-    
-     <item
-        android:id="@+id/assigned"
-        android:showAsAction="ifRoom"
-        android:title="@string/menu_item_assigned"/>
-    <item
-        android:id="@+id/unassigned"
-        android:showAsAction="ifRoom"
-        android:title="@string/menu_item_unassigned"/>
-
 </menu>

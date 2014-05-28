@@ -57,7 +57,11 @@
     <string name="hint_secondary_ticket">Write new ticket</string>
 
     <!-- Menus Text -->
-    <string name="menu_item_assigned">Assigned Tickets</string>
-    <string name="menu_item_unassigned">Unassigned Tickets</string>
+    <string name="tab_item_assigned">Assigned Tickets</string>
+    <string name="tab_item_unassigned">Unassigned Tickets</string>
+    <string name="fragment_stack_support">Fragment/Stack</string>
+    <string name="home">Go home</string>
+    <string name="new_fragment">Add new</string>
+    <string name="delete_fragment">Pop top</string>
 
 </resources>
