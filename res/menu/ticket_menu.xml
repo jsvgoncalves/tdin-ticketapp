@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/reply"
+        android:showAsAction="ifRoom"
+        android:title="@string/btn_reply"/>
+    <item
+        android:id="@+id/seconday_ticket"
+        android:showAsAction="ifRoom"
+        android:title="@string/btn_create_secondary"/>
+
+</menu>
