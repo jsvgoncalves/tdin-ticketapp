@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Default user credentials -->
-    <string name="default_user">jsvgoncalves@gmail.com</string>
+    <string name="default_user">itguy.1@fe.up.pt</string>
     <string name="default_pass">123456</string>
 
     <!-- Application Information -->
