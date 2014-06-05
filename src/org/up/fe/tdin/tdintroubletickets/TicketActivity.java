@@ -1,6 +1,8 @@
 package org.up.fe.tdin.tdintroubletickets;
 
-import org.up.fe.tdin.tdintroubletickets.model.TDINTroubleTickets;
+import org.up.fe.tdin.tdintroubletickets.model.*;
+import org.up.fe.tdin.tdintroubletickets.helper.ComService;
+import org.up.fe.tdin.tdintroubletickets.helper.JSONHelper;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,15 +11,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
+
+import org.json.JSONObject;
 
 public class TicketActivity extends Activity {
 	TDINTroubleTickets tdin;
-
+	int ticket_pos;
+	Ticket ticket;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		tdin = (TDINTroubleTickets) getApplication();
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			String ticket_type = extras.getString("position");
+			ticket_pos = Integer.parseInt(ticket_type);
+			ticket = User.userTickets.get(ticket_pos);
+		} else {
+			// panic
+		}
+
 		setContentView(R.layout.activity_ticket);
+		setTicketInfo();
+
 	}	
 	
 	
@@ -98,5 +117,24 @@ public class TicketActivity extends Activity {
 		reply_layout.setVisibility(LinearLayout.GONE);
 	}
 
-	
+	public void setTicketInfo() {
+		TextView view = (TextView) findViewById(R.id.title);
+		view.setText(ticket.title);
+
+		view = (TextView) findViewById(R.id.description);
+		view.setText(ticket.description);
+		
+		view = (TextView) findViewById(R.id.name);
+		view.setText(ticket.user_name);
+		
+		view = (TextView) findViewById(R.id.email);
+		view.setText(ticket.user_email);
+		
+		view = (TextView) findViewById(R.id.date);
+		view.setText(ticket.created_at);
+		
+		view = (TextView) findViewById(R.id.id);
+		view.setText(ticket.uuid);
+		
+	}
 }

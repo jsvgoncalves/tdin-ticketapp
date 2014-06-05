@@ -72,10 +72,4 @@ public class UnAssignedTicketsFragment extends android.support.v4.app.Fragment{
 
 		lv.setOnItemClickListener(mMessageClickedHandler);
 	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		initList();
-	}
 }
