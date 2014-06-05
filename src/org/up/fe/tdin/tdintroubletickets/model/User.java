@@ -112,7 +112,9 @@ public class User {
 						JSONHelper.getValue(json, "Ticket", "created"),
 						JSONHelper.getValue(json, "Ticket", "modified"),
 						JSONHelper.getValue(json, "Ticket", "title"),
-						JSONHelper.getValue(json, "Ticket", "description")
+						JSONHelper.getValue(json, "Ticket", "description"),
+						JSONHelper.getValue(json, "User", "name"),
+						JSONHelper.getValue(json, "User", "email")
 						);
 				tickets.add(t);
 			} catch (Exception e) {

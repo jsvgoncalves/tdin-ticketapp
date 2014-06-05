@@ -38,6 +38,10 @@
             android:name="org.up.fe.tdin.tdintroubletickets.TicketActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="org.up.fe.tdin.tdintroubletickets.AcceptTicketActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

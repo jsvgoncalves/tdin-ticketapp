@@ -10,7 +10,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/acpt_title"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -22,7 +22,7 @@
             android:textSize="40sp" />
 
         <TextView
-            android:id="@+id/acpt_description"
+            android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -49,7 +49,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/acpt_name"
+                    android:id="@+id/name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -73,7 +73,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/acpt_email"
+                    android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -97,7 +97,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/acpt_date"
+                    android:id="@+id/date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -121,7 +121,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/acpt_id"
+                    android:id="@+id/id"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -134,7 +134,7 @@
         </TableLayout>
 
         <LinearLayout
-            android:id="@+id/acpt_reply_layout"
+            android:id="@+id/reply_layout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="10dp"
@@ -163,7 +163,7 @@
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/acpt_button_ticket_reply_final"
+                    android:id="@+id/button_ticket_reply_final"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -186,7 +186,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/acpt_create_secondary_layout"
+            android:id="@+id/create_secondary_layout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="10dp"
@@ -215,7 +215,7 @@
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/acpt_button_ticket_rep"
+                    android:id="@+id/button_ticket_rep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
