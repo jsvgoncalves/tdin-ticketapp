@@ -203,7 +203,7 @@ public class MainActivity extends Activity {
 			// Parse the tickets
 			User.parseUnassignedTickets(json);
 			User.updateTicketsDB(this);
-
+			dialog.dismiss();
 			startHome();
 		} else {
 			// Show an error
