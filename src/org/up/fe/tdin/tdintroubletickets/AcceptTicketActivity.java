@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 
-public class TicketActivity extends Activity {
+public class AcceptTicketActivity extends Activity {
 	TDINTroubleTickets tdin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		tdin = (TDINTroubleTickets) getApplication();
-		setContentView(R.layout.activity_ticket);
+		setContentView(R.layout.activity_accept_ticket);
 	}	
 	
 	

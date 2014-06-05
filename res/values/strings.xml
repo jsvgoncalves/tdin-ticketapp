@@ -50,6 +50,7 @@
 
     <!-- Ticket Buttons -->
     <string name="btn_reply">Reply</string>
+    <string name="btn_accept">Accept</string>
     <string name="btn_create_secondary">Create Secondary Ticket</string>
 
     <!-- hints -->

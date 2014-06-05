@@ -64,7 +64,7 @@ public class UnAssignedTicketsFragment extends android.support.v4.app.Fragment{
 		OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
 			public void onItemClick(AdapterView parent, View v, int position, long id) {
 				Log.d("initList()", "clicked a ticket " + position);
-				Intent intent = new Intent(getActivity(), TicketActivity.class);
+				Intent intent = new Intent(getActivity(), AcceptTicketActivity.class);
 				intent.putExtra("position", position + "");
 				startActivity(intent);
 			}

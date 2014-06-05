@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/acpt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/default_title"
+            android:textColor="@color/app_orange"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/acpt_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/default_description"
+            android:textSize="15sp" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow android:layout_marginBottom="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.0"
+                    android:text="@string/pre_name"
+                    android:textColor="@color/app_orange"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acpt_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2.0"
+                    android:text="@string/default_name"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.0"
+                    android:text="@string/pre_email"
+                    android:textColor="@color/app_orange"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acpt_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2.0"
+                    android:text="@string/default_email"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.0"
+                    android:text="@string/pre_date"
+                    android:textColor="@color/app_orange"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acpt_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2.0"
+                    android:text="@string/default_date"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="20dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.0"
+                    android:text="@string/pre_id"
+                    android:textColor="@color/app_orange"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acpt_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2.0"
+                    android:singleLine="false"
+                    android:text="@string/default_id"
+                    android:textSize="15sp" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:id="@+id/acpt_reply_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/btn_reply"
+                android:textColor="@color/app_orange"
+                android:textSize="25sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/hint_reply"
+                android:singleLine="false" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/acpt_button_ticket_reply_final"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/app_btn_style"
+                    android:onClick="reply"
+                    android:padding="10dp"
+                    android:text="@string/btn_reply"
+                    android:textColor="@drawable/app_btn_style" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/app_btn_style"
+                    android:onClick="cancelReply"
+                    android:padding="10dp"
+                    android:text="@string/cancel"
+                    android:textColor="@drawable/app_btn_style" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/acpt_create_secondary_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/btn_create_secondary"
+                android:textColor="@color/app_orange"
+                android:textSize="25sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/hint_secondary_ticket"
+                android:singleLine="false" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/acpt_button_ticket_rep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/app_btn_style"
+                    android:onClick="createSecondaryTicket"
+                    android:padding="10dp"
+                    android:text="@string/btn_create_secondary"
+                    android:textColor="@drawable/app_btn_style" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/app_btn_style"
+                    android:onClick="cancelReply"
+                    android:padding="10dp"
+                    android:text="@string/cancel"
+                    android:textColor="@drawable/app_btn_style" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
