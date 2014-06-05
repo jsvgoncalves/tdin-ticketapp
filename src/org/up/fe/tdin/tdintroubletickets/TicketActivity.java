@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.app.ProgressDialog;
+import android.util.Log;
+import android.content.Intent;
 
 import org.json.JSONObject;
 
@@ -19,7 +24,8 @@ public class TicketActivity extends Activity {
 	TDINTroubleTickets tdin;
 	int ticket_pos;
 	Ticket ticket;
-	
+	ProgressDialog dialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -93,7 +99,18 @@ public class TicketActivity extends Activity {
 	 * to show reply fields
 	 */
 	public void reply(View v) {
-		//TODO: reply/solve ticket
+		// new progressbar
+		EditText msg = (EditText) findViewById(R.id.reply_msg);
+		new ComService(
+			"/tickets/reply/" + ticket.uuid + "/" + msg.getText().toString(), // route
+			TicketActivity.this, // this context
+			"replyDone", // callback
+			false // show progress bar
+			);
+		dialog = new ProgressDialog(this);
+		dialog.setMessage(getString(R.string.fetching_data));
+		dialog.setCancelable(false);
+		dialog.show();
 	}
 	
 	
@@ -136,5 +153,114 @@ public class TicketActivity extends Activity {
 		view = (TextView) findViewById(R.id.id);
 		view.setText(ticket.uuid);
 		
+	}
+
+	/**
+	 * Callback method for login communication.
+	 */
+	public void replyDone(String result) {
+		// Prevents exceptions
+		if(result == null) {
+			result = "";
+		}
+
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+
+		// If the accept was successfull
+		if(status.equals("ok")) {
+			//startHome();
+			// GET [user][User][id];
+			//String uuid = JSONHelper.getValue(json, "user", "Solver", "id");
+			//String uuid = "[user][User][id]";
+			//User.unassignedTickets.remove(ticket_pos);
+			//Toast.makeText(this, "Accepted ticket", Toast.LENGTH_SHORT).show();
+			//finish();
+			fetchTickets();
+		} else {
+			// Show an error
+			dialog.dismiss();
+			Toast.makeText(this, "Reply failed", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	public void startHome() {
+		// Start the new activity.
+		Toast.makeText(this, "Accepted ticket", Toast.LENGTH_SHORT).show();
+		Intent home_intent = new Intent(TicketActivity.this, HomeActivity.class);
+		home_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(home_intent);
+		finish(); // Finishes this activity.
+	}
+
+	public void fetchTickets() {
+		// Comservice
+		new ComService(
+			"solvers/assigned/" + tdin.getUUID(), // route
+			TicketActivity.this, // this context
+			"fetchedTickets", // callback
+			false // show progress bar
+			);
+		// fetchedTickets()
+	}
+
+	public void fetchedTickets(String result) {
+		// If all is good
+		// 1st - save the tickets to the db.
+		Log.d("fetchedTickets():result", result);
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		// If the login was successfull
+		if(status.equals("ok")) {
+			
+			// Parse the tickets
+			// parseTickets();
+			User.parseUserTickets(json);
+			User.updateTicketsDB(this);
+
+			// Fetch unassigned tickets
+			fetchUnassignedTickets();
+		} else {
+			// Show an error
+			dialog.dismiss();
+			//Log.d("fetchedTickets()", "failed login");
+			Toast.makeText(this, "Something failed", Toast.LENGTH_SHORT).show();
+			findViewById(R.id.button_login).setEnabled(true);
+			findViewById(R.id.button_register).setEnabled(true);
+		}
+	}
+
+	public void fetchUnassignedTickets() {
+		// Comservice
+		new ComService(
+			"tickets/unassigned", // route
+			TicketActivity.this, // this context
+			"fetchedUnassignedTickets", // callback
+			false // show progress bar
+			);
+	}
+
+	public void fetchedUnassignedTickets(String result) {
+		// If all is good
+		// 1st - save the tickets to the db.
+		//Log.d("fetchedUnassignedTickets():result", result);
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		// If the login was successfull
+		if(status.equals("ok")) {
+			
+			// Parse the tickets
+			User.parseUnassignedTickets(json);
+			User.updateTicketsDB(this);
+			dialog.dismiss();
+			startHome();
+		} else {
+			// Show an error
+			dialog.dismiss();
+			//Log.d("fetchedUnassignedTickets()", "failed login");
+			Toast.makeText(this, "Something failed", Toast.LENGTH_SHORT).show();
+			findViewById(R.id.button_login).setEnabled(true);
+			findViewById(R.id.button_register).setEnabled(true);
+		}
 	}
 }
