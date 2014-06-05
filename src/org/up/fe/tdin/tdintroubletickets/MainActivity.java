@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
 	public void fetchTickets() {
 		// Comservice
 		new ComService(
-			"solvers/view/" + tdin.getUUID(), // route
+			"solvers/assigned/" + tdin.getUUID(), // route
 			MainActivity.this, // this context
 			"fetchedTickets", // callback
 			false // show progress bar
@@ -166,8 +166,8 @@ public class MainActivity extends Activity {
 			
 			// Parse the tickets
 			// parseTickets();
-			//User.parseTickets(json);
-			//User.updateTicketsDB(this);
+			User.parseUserTickets(json);
+			User.updateTicketsDB(this);
 
 			// Fetch unassigned tickets
 			fetchUnassignedTickets();

@@ -120,7 +120,7 @@ public class AcceptTicketActivity extends Activity {
 	public void fetchTickets() {
 		// Comservice
 		new ComService(
-			"solvers/view/" + tdin.getUUID(), // route
+			"solvers/assigned/" + tdin.getUUID(), // route
 			AcceptTicketActivity.this, // this context
 			"fetchedTickets", // callback
 			false // show progress bar
@@ -139,8 +139,8 @@ public class AcceptTicketActivity extends Activity {
 			
 			// Parse the tickets
 			// parseTickets();
-			//User.parseTickets(json);
-			//User.updateTicketsDB(this);
+			User.parseUserTickets(json);
+			User.updateTicketsDB(this);
 
 			// Fetch unassigned tickets
 			fetchUnassignedTickets();
