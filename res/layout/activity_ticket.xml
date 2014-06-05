@@ -202,12 +202,23 @@
                 android:text="@string/btn_create_secondary"
                 android:textColor="@color/app_orange"
                 android:textSize="25sp" />
-
+            <Spinner
+                android:id="@+id/departments"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
             <EditText
+                android:id="@+id/secondary_msg"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_secondary_ticket"
+                android:singleLine="false" />
+            <EditText
+                android:id="@+id/secondary_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/hint_secondary_ticket_title"
                 android:singleLine="false" />
 
             <LinearLayout

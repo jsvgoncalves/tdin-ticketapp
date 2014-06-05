@@ -14,17 +14,26 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Spinner;
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.content.Intent;
-
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import org.json.JSONObject;
 
-public class TicketActivity extends Activity {
+public class TicketActivity extends Activity implements OnItemSelectedListener {
 	TDINTroubleTickets tdin;
 	int ticket_pos;
+	int spinner_pos;
 	Ticket ticket;
 	ProgressDialog dialog;
+
+	// Array of choices
+	String depts[] = {"Dept. 1", "Dept. 2", "Dept. 3"};
+	String depts_uuid[] = {"536c1c57-5ff4-4ac6-b9d2-59b2e1c5656e", "123", "123"};
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,22 @@ public class TicketActivity extends Activity {
 	 */
 	public void createSecondaryTicket(View v) {
 		//TODO: create secondary ticket
+		EditText msg = (EditText) findViewById(R.id.secondary_msg);
+		EditText title = (EditText) findViewById(R.id.secondary_title);
+		new ComService(
+			"/secondaryTickets/addFromApp/" + 
+				depts_uuid[spinner_pos] + "/" + 
+				ticket.uuid + "/" + 
+				title.getText().toString()  + "/" + 
+				msg.getText().toString(), // route
+			TicketActivity.this, // this context
+			"replyDone", // callback
+			false // show progress bar
+			);
+		dialog = new ProgressDialog(this);
+		dialog.setMessage(getString(R.string.fetching_data));
+		dialog.setCancelable(false);
+		dialog.show();
 	}
 	
 	/**
@@ -102,7 +127,7 @@ public class TicketActivity extends Activity {
 		// new progressbar
 		EditText msg = (EditText) findViewById(R.id.reply_msg);
 		new ComService(
-			"/tickets/reply/" + ticket.uuid + "/" + msg.getText().toString(), // route
+			"/tickets/reply/" + ticket.uuid + "/" + msg.getText().toString(), 
 			TicketActivity.this, // this context
 			"replyDone", // callback
 			false // show progress bar
@@ -152,6 +177,16 @@ public class TicketActivity extends Activity {
 		
 		view = (TextView) findViewById(R.id.id);
 		view.setText(ticket.uuid);
+
+		
+		// Selection of the spinner
+		Spinner spinner = (Spinner) findViewById(R.id.departments);
+
+		// Application of the Array to the Spinner
+		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, depts);
+		spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+		spinner.setAdapter(spinnerArrayAdapter);
+		spinner.setOnItemSelectedListener(this);
 		
 	}
 
@@ -163,6 +198,8 @@ public class TicketActivity extends Activity {
 		if(result == null) {
 			result = "";
 		}
+
+		Log.d("got it ", result);
 
 		JSONObject json = JSONHelper.string2JSON(result);
 		String status = JSONHelper.getValue(json, "status");
@@ -262,5 +299,15 @@ public class TicketActivity extends Activity {
 			findViewById(R.id.button_login).setEnabled(true);
 			findViewById(R.id.button_register).setEnabled(true);
 		}
+	}
+
+	public void onItemSelected(AdapterView<?> parent, View view, 
+			int pos, long id) {
+		// An item was selected. You can retrieve the selected item using
+		spinner_pos = pos;
+	}
+
+	public void onNothingSelected(AdapterView<?> parent) {
+		// Another interface callback
 	}
 }

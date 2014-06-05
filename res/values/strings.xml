@@ -56,6 +56,7 @@
     <!-- hints -->
     <string name="hint_reply">Write reply here</string>
     <string name="hint_secondary_ticket">Write new ticket</string>
+    <string name="hint_secondary_ticket_title">Write new ticket title</string>
 
     <!-- Menus Text -->
     <string name="tab_item_assigned">Assigned Tickets</string>
