@@ -113,12 +113,11 @@ public class MainActivity extends Activity {
 			result = "";
 		}
 
-		Log.d("loginDone()", "Have I logged in?");
-		Log.d("loginDone():result", result);
+		//Log.d("loginDone():result", result);
 
 		JSONObject json = JSONHelper.string2JSON(result);
 		String status = JSONHelper.getValue(json, "status");
-		Log.d("loginDone():status", status);
+		//Log.d("loginDone():status", status);
 
 		// If the login was successfull
 		if(status.equals("ok")) {
@@ -131,7 +130,7 @@ public class MainActivity extends Activity {
 		} else {
 			// Show an error
 			dialog.dismiss();
-			Log.d("loginDone()", "failed login");
+			//Log.d("loginDone()", "failed login");
 			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 			findViewById(R.id.button_login).setEnabled(true);
 			findViewById(R.id.button_register).setEnabled(true);
@@ -175,7 +174,7 @@ public class MainActivity extends Activity {
 		} else {
 			// Show an error
 			dialog.dismiss();
-			Log.d("loginDone()", "failed login");
+			//Log.d("fetchedTickets()", "failed login");
 			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 			findViewById(R.id.button_login).setEnabled(true);
 			findViewById(R.id.button_register).setEnabled(true);
@@ -195,7 +194,7 @@ public class MainActivity extends Activity {
 	public void fetchedUnassignedTickets(String result) {
 		// If all is good
 		// 1st - save the tickets to the db.
-		Log.d("fetchedUnassignedTickets():result", result);
+		//Log.d("fetchedUnassignedTickets():result", result);
 		JSONObject json = JSONHelper.string2JSON(result);
 		String status = JSONHelper.getValue(json, "status");
 		// If the login was successfull
@@ -209,7 +208,7 @@ public class MainActivity extends Activity {
 		} else {
 			// Show an error
 			dialog.dismiss();
-			Log.d("loginDone()", "failed login");
+			//Log.d("fetchedUnassignedTickets()", "failed login");
 			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 			findViewById(R.id.button_login).setEnabled(true);
 			findViewById(R.id.button_register).setEnabled(true);
