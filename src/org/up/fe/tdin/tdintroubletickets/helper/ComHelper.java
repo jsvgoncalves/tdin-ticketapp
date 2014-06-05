@@ -105,7 +105,7 @@ public class ComHelper{
 			//Log.v("http-content",  EntityUtils.toString(response.getEntity()));
 			return EntityUtils.toString(response.getEntity());
 		} catch(Exception e) {
-
+			Log.d("getHTTP():Exception", e.toString());
 		}
 		return null;
 	}

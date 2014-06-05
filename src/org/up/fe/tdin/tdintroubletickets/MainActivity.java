@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
 		if(status.equals("ok")) {
 			//startHome();
 			// GET [user][User][id];
-			String uuid = JSONHelper.getValue(json, "user", "User", "id");
+			String uuid = JSONHelper.getValue(json, "user", "Solver", "id");
 			//String uuid = "[user][User][id]";
 			tdin.setUUID(uuid);
 			fetchTickets();
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
 	public void fetchTickets() {
 		// Comservice
 		new ComService(
-			"users/view/" + tdin.getUUID(), // route
+			"solvers/view/" + tdin.getUUID(), // route
 			MainActivity.this, // this context
 			"fetchedTickets", // callback
 			false // show progress bar
@@ -185,7 +185,7 @@ public class MainActivity extends Activity {
 	public void fetchUnassignedTickets() {
 		// Comservice
 		new ComService(
-			"users/view/" + tdin.getUUID(), // route
+			"tickets/unassigned", // route
 			MainActivity.this, // this context
 			"fetchedUnassignedTickets", // callback
 			false // show progress bar
@@ -202,10 +202,9 @@ public class MainActivity extends Activity {
 		if(status.equals("ok")) {
 			
 			// Parse the tickets
-			User.parseTickets(json);
+			User.parseUnassignedTickets(json);
 			User.updateTicketsDB(this);
 
-			// parseTickets();
 			startHome();
 		} else {
 			// Show an error

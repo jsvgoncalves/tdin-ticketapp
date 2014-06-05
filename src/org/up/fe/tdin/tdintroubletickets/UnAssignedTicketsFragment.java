@@ -38,17 +38,17 @@ public class UnAssignedTicketsFragment extends android.support.v4.app.Fragment{
 		ticketsArray = new ArrayList<Map<String,String>>();
 
 		// If there is no history just show a message
-		if (User.userTickets.isEmpty()) {
+		if (User.unassignedTickets.isEmpty()) {
 			HashMap<String, String> ticketItem = new HashMap<String, String>();
 			ticketItem.put("first-line", "No tickets");
 			ticketItem.put("second-line", "You have not been assigned any trouble tickets.");
 			ticketsArray.add(ticketItem);
 		} else { // Else lets add ticketItems
 			// Each Map is one List entry with 2 lines
-			for (Ticket ticket : User.userTickets) {
+			for (Ticket ticket : User.unassignedTickets) {
 				HashMap<String, String> ticketItem = new HashMap<String, String>();
-				ticketItem.put("first-line", "T" + ticket.ticket_type);
-				ticketItem.put("second-line", ticket.uuid);
+				ticketItem.put("first-line", ticket.title);
+				ticketItem.put("second-line", ticket.description);
 				ticketItem.put("id", ticket.id + "");
 				ticketsArray.add(ticketItem);
 			}

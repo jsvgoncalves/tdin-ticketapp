@@ -87,12 +87,17 @@ public class User {
 	}
 	
 	public static void parseTickets(JSONObject json) {
-		ArrayList<String> userT = JSONHelper.getArray(json, "user", "Ticket");
+		ArrayList<String> userT = JSONHelper.getArray(json, "tickets");
 		// ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
 		
 		
 		// parseTicketArray(t1, unassignedTickets);
 		parseTicketArray(userT, userTickets);
+	}
+
+	public static void parseUnassignedTickets(JSONObject json) {
+		ArrayList<String> userT = JSONHelper.getArray(json, "tickets");
+		parseTicketArray(userT, unassignedTickets);
 	}
 
 	private static void parseTicketArray(ArrayList<String> tickets_str, ArrayList<Ticket> tickets) {
@@ -103,12 +108,14 @@ public class User {
 			try {
 				Ticket t = new Ticket(0,
 						0,
-						json.getString("id"),
-						json.getString("created"),
-						json.getString("modified"),
-						json.getString("title"));
+						JSONHelper.getValue(json, "Ticket", "id"),
+						JSONHelper.getValue(json, "Ticket", "created"),
+						JSONHelper.getValue(json, "Ticket", "modified"),
+						JSONHelper.getValue(json, "Ticket", "title"),
+						JSONHelper.getValue(json, "Ticket", "description")
+						);
 				tickets.add(t);
-			} catch (JSONException e) {
+			} catch (Exception e) {
 				System.err.println(e.toString());
 				System.err.println("Invalid JSON while retrieving tickets!");
 			}
